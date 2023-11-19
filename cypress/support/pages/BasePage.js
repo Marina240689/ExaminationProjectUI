@@ -1,9 +1,13 @@
+///<reference types="cypress"/>
+
 export default class BasePage {
 
     constructor() {
         this.elements = {};
         this.elements.acceptCookieButton = '.cc-dismiss';
         this.elements.dissmissWelcomeMessageButton = '.close-dialog';
+        this.elements.accountIcon = '#navbarAccount';
+        this.elements.accountMenu = '[class*="mat-menu-content"]';
     }
 
     getAcceptCookieButton() {
@@ -14,8 +18,15 @@ export default class BasePage {
         return cy.get(this.elements.dissmissWelcomeMessageButton);
     }
 
+    getAccountIcon() {
+        return cy.get(this.elements.accountIcon);
+    }
 
-    acceptCookieButton(){
+    getAccountMenu() {
+        return cy.get(this.elements.accountMenu);
+    }
+
+    acceptCookie(){
         cy.log('Accept cookie')
         this.getAcceptCookieButton().then(cookie => {
             if(cookie.length > 0) {
@@ -33,6 +44,8 @@ export default class BasePage {
         })
 
     }
+
+   
 
 
 

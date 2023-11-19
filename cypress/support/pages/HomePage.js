@@ -10,7 +10,7 @@ class HomePage extends BasePage {
     visit(){
         cy.log('Opening home page6 accept cookie and close welcome message')
         cy.visit('/');
-        this.acceptCookieButton();
+        this.acceptCookie();
         this.closeWelcomeMessage();
 
 
