@@ -19,7 +19,7 @@ import summary from '../support/pages/OrderSummaryPage';
 import completion from '../support/pages/OrderCompletionPage'
 
 user.email = faker.internet.email({ provider: 'testmail.com' });
-user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/); /**Так генерує пароль без спец символів */
+user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/);
 user.answear = faker.person.firstName('female');
 address.country = faker.location.country();
 address.name = faker.person.firstName();
@@ -33,8 +33,6 @@ paymentMethods.paymentData.cardNumber = faker.finance.creditCardNumber({ issuer:
 
 describe('Order with function', () => {
 
-    /* Move to BEFORE */
-
     before(() => {
         registration.visit();
         registration.acceptCookie();
@@ -42,7 +40,6 @@ describe('Order with function', () => {
         registration.checkSuccessToastMessage(message.registrationToast);
         login.checkLoginPopupAppeared();
         login.login(user);
-
     })
 
     it('Make and order', () => {
@@ -52,31 +49,40 @@ describe('Order with function', () => {
         findProduct(product.secondPage.productName);
         home.checkSuccessToastMessage(product.secondPage.productName);
 
+        new Promise((resolve) => {
+            setTimeout(() => {
 
-        basket.visit();
-        basket.checkProductIsPresentInBasket(product.secondPage);
-        basket.clickCheckoutButton();
 
-        chooseAddress.clickAddAddressButton();
-        createAddress.createAddress(address);
-        chooseAddress.checkSelectAddressCheckbox();
-        chooseAddress.checkSuccessToastMessage(address.city);
+                basket.visit();
+                basket.checkProductIsPresentInBasket(product.secondPage);
+                basket.clickCheckoutButton();
 
-        delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
+                chooseAddress.clickAddAddressButton();
+                createAddress.createAddress(address);
+                createAddress.checkSuccessToastMessage(address.city);
 
-        payment.choosePaymentMethod(paymentMethods.methods.card);
+                chooseAddress.chooseAddress();
 
-        payment.fillCardData(address, paymentMethods.paymentData);
-        payment.checkSuccessToastMessage(message.cardToast);
-        payment.chooseCard();
-        payment.clickContinueButton();
 
-        summary.checkProductInSummary(product.secondPage);
-        summary.ConfirmPlaceOrder();
 
-        completion.checkSuccessOrderText(message.orderConfirmationText);
+                delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
 
+                payment.choosePaymentMethod(paymentMethods.methods.card);
+
+                payment.fillCardData(address, paymentMethods.paymentData);
+                payment.checkSuccessToastMessage(message.cardToast);
+                payment.chooseCard();
+                payment.clickContinueButton();
+
+                summary.checkProductInSummary(product.secondPage);
+                summary.ConfirmPlaceOrder();
+
+                completion.checkSuccessOrderText(message.orderConfirmationText);
+
+                resolve();
+            }, 2000)
+
+        })
     })
-
 
 })

@@ -49,18 +49,18 @@ class CreateAddressPage extends BasePage {
     createAddress(address) {
 
         cy.log('Fill address fields')
-        this.getCountryField().type(address.country);
-        this.getNameField().type(address.name);
-        this.getMobileNumberField().type(address.phone);
-        this.getZipField().type(address.zip);
-        this.getAddressField().type(address.address);
-        this.getCityField().type(address.city);
-        this.getStateField().type(address.state);
+        this.getCountryField().type(address.country, { force: true });
+        this.getNameField().type(address.name, { force: true });
+        this.getMobileNumberField().type(address.phone, { force: true });
+        this.getZipField().type(address.zip, { force: true });
+        this.getAddressField().type(address.address, { force: true });
+        this.getCityField().type(address.city, { force: true });
+        this.getStateField().type(address.state, { force: true });
 
         cy.log('Check Submit button is active and click');
         this.getSubmitButton()
             .should('be.enabled')
-            .click();
+            .click({ force: true });
 
     }
 

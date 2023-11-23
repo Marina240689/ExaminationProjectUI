@@ -9,7 +9,7 @@ import message from '../fixtures/messages.json'
 
 
 user.email = faker.internet.email({ provider: 'testmail.com' });
-user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/); /**Так генерує пароль без спец символів */
+user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/);
 user.answear = faker.person.firstName('female');
 
 
@@ -23,7 +23,6 @@ describe('Registration', () => {
     registration.register(user, question.mothersName);
     registration.checkSuccessToastMessage(message.registrationToast);
 
-   
     login.checkLoginPopupAppeared();
   })
 
@@ -34,7 +33,7 @@ describe('Registration', () => {
     login.acceptCookie();
     login.closeWelcomeMessage();
     login.login(user);
-    login.checkUserIsLogedIn(user)
+    login.checkUserIsLogedIn(user);
   })
 
 

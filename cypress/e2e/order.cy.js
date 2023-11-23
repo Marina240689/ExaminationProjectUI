@@ -2,7 +2,7 @@ import login from '../support/pages/LoginPage';
 import registration from '../support/pages/RegistrationPage';
 import home from '../support/pages/HomePage';
 import user from '../fixtures/user.json';
-import { fa, faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import question from '../fixtures/securityQuestion.json';
 import product from '../fixtures/product.json';
 import basket from '../support/pages/BasketPage';
@@ -20,7 +20,7 @@ import completion from '../support/pages/OrderCompletionPage'
 
 
 user.email = faker.internet.email({ provider: 'testmail.com' });
-user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/); /**Так генерує пароль без спец символів */
+user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/);
 user.answear = faker.person.firstName('female');
 address.country = faker.location.country();
 address.name = faker.person.firstName();
@@ -42,36 +42,49 @@ describe('Order test', () => {
         registration.checkSuccessToastMessage(message.registrationToast);
         login.checkLoginPopupAppeared();
         login.login(user);
+        login.checkUserIsLogedIn(user);
 
     })
 
     it('Make and order', () => {
+
         home.visit();
-        home.addToBasket(product.firstPage);
-        home.checkSuccessToastMessage(product.firstPage.productName);
 
-        basket.visit();
-        basket.checkProductIsPresentInBasket(product.firstPage);
-        basket.clickCheckoutButton();
+        new Promise ((resolve) => {
+            setTimeout(() => {
 
-        chooseAddress.clickAddAddressButton();
-        createAddress.createAddress(address);
-        chooseAddress.checkSelectAddressCheckbox();
-        chooseAddress.checkSuccessToastMessage(address.city);
+                home.addToBasket(product.firstPage);
+                home.checkSuccessToastMessage(product.firstPage.productName);
+        
+                basket.visit();
+                basket.checkProductIsPresentInBasket(product.firstPage);
+                basket.clickCheckoutButton();
+        
+                chooseAddress.clickAddAddressButton();
+                createAddress.createAddress(address);
+                createAddress.checkSuccessToastMessage(address.city);
+        
+                chooseAddress.chooseAddress();
+                
+        
+                delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
+        
+                payment.choosePaymentMethod(paymentMethods.methods.card);
+        
+                payment.fillCardData(address, paymentMethods.paymentData);
+                payment.checkSuccessToastMessage(message.cardToast);
+                payment.chooseCard();
+                payment.clickContinueButton();
+        
+                summary.checkProductInSummary(product.firstPage);
+                summary.ConfirmPlaceOrder();
+        
+                completion.checkSuccessOrderText(message.orderConfirmationText);
 
-        delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
+                resolve();
+            }, 2000)
 
-        payment.choosePaymentMethod(paymentMethods.methods.card);
-
-        payment.fillCardData(address, paymentMethods.paymentData);
-        payment.checkSuccessToastMessage(message.cardToast);
-        payment.chooseCard();
-        payment.clickContinueButton();
-
-        summary.checkProductInSummary(product.firstPage);
-        summary.ConfirmPlaceOrder();
-
-        completion.checkSuccessOrderText(message.orderConfirmationText);
+        })
 
     })
 

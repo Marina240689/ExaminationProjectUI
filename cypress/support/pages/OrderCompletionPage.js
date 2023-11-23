@@ -7,11 +7,11 @@ class OrderSummaryPage extends BasePage {
         this.elements.orderConfirmationMessage = '.confirmation'
     }
 
-    getOrderConfirmationMessage(){
+    getOrderConfirmationMessage() {
         return cy.get(this.elements.orderConfirmationMessage);
     }
 
-    checkSuccessOrderText(text){
+    checkSuccessOrderText(text) {
 
         cy.log('Check that order is success ');
         this.getOrderConfirmationMessage().contains(text)

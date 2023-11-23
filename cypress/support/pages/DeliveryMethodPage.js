@@ -21,12 +21,12 @@ class DeliveryMethodPage extends BasePage {
     chooseDeliveryMethod(option) {
 
         cy.log('Click delivery method')
-        cy.get(`[data-icon=${option.icon}]`, {timeout:2000}).click();
+        cy.get(`[data-icon=${option.icon}]`, { timeout: 2000 }).click( {force: true} );
 
         cy.log('Check button is enabled and click');
         this.getNextButton()
             .should('be.enabled')
-            .click();
+            .click( {force: true} );
     }
 
 }

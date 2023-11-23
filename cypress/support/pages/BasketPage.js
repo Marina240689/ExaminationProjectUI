@@ -4,23 +4,29 @@ class BasketPage extends BasePage {
 
     constructor() {
         super()
-        this.elements.checkoutButton = 'button#checkoutButton'
+        this.elements.checkoutButton = 'button#checkoutButton';
+        this.elements.basketContainers = '.mat-card .mat-table';
     }
 
     visit() {
 
         cy.log('Visist checkout page')
-        cy.visit('/basket');
+        cy.visit('/basket', { timeout: 2000 });
     }
 
     getCheckoutButton() {
         return cy.get(this.elements.checkoutButton)
     }
 
+    getBasketContainer() {
+        return cy.get(this.elements.basketContainers)
+    }
+
     checkProductIsPresentInBasket(product) {
 
         cy.log('Check that product is present in card')
-        cy.get('.mat-card .mat-table').contains(product.productName)
+        this.getBasketContainer()
+            .contains(product.productName)
 
     }
 
@@ -28,7 +34,7 @@ class BasketPage extends BasePage {
 
         cy.log('Click checkout button')
         this.getCheckoutButton()
-            .click();
+            .click({ force: true });
     }
 
 

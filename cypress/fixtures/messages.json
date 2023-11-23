@@ -1,5 +1,7 @@
 {
   "cardToast": "has been saved for your convenience.",
   "registrationToast": "Registration completed successfully.",
-  "orderConfirmationText": "Thank you for your purchase!"
+  "feedbackTost": "Thank you so much for your amazing 5-star feedback!",
+  "orderConfirmationText": "Thank you for your purchase!",
+  "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 }

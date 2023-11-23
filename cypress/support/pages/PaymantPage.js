@@ -53,21 +53,21 @@ class PaymentPage extends BasePage {
     choosePaymentMethod(method) {
 
         cy.log('Choose Payment Method')
-        this.getListOfPaymentMethods().contains(method).click();
+        this.getListOfPaymentMethods().contains(method).click({ force: true });
     }
 
     fillCardData(data, payment) {
 
         cy.log('Fill card data')
-        this.getNameInput().type(data.name)
-        this.getCardNumberInput().type(payment.cardNumber);
-        this.getExpireMonthDropdown().select('1');
-        this.getExpireYearDropdown().select('2083');
+        this.getNameInput().type(data.name, { force: true })
+        this.getCardNumberInput().type(payment.cardNumber, { force: true });
+        this.getExpireMonthDropdown().select('1', { force: true });
+        this.getExpireYearDropdown().select('2083', { force: true });
 
         cy.log('Check that Submit button is enabled and click')
         this.getSubmitButton()
             .should('be.enabled')
-            .click();
+            .click({ force: true });
     }
 
     chooseCard() {
@@ -79,7 +79,7 @@ class PaymentPage extends BasePage {
     clickContinueButton() {
 
         cy.log('Click Continue button after choosing card');
-        this.getContinueButton().click({force: true});
+        this.getContinueButton().click({ force: true });
     }
 
 

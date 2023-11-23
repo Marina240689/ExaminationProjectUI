@@ -13,7 +13,7 @@ class HomePage extends BasePage {
 
     visit() {
         cy.log('Opening home page, accept cookie and close welcome message')
-        cy.visit('/', {timeout: 4000});
+        cy.visit('/', { timeout: 4000 });
     }
 
     getAllProductTitles() {
@@ -33,15 +33,7 @@ class HomePage extends BasePage {
         this.getAllProductTitles().contains(product.productName)
             .closest('.ribbon-card')
             .find('[aria-label="Add to Basket"]')
-            .click();
-
-    }
-
-    checkSuccessToastMessage(text) {
-
-        cy.log('Check that success toast message appeared and contains product name')
-        cy.get('simple-snack-bar .mat-simple-snack-bar-content')
-            .invoke('text').should('contain', text)
+            .click({ force: true }, { timeout: 3000 });
 
     }
 

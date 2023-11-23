@@ -16,7 +16,7 @@ class LoginPage extends BasePage {
 
     visit() {
         cy.log('Open login page')
-        cy.visit('/login', {timeout: 3000});
+        cy.visit('/login', { timeout: 3000 });
 
 
     }
@@ -72,6 +72,7 @@ class LoginPage extends BasePage {
     }
 
     checkUserIsLogedIn(user) {
+
         cy.log('Click on Account Icon')
         this.getAccountIcon()
             .click();
@@ -85,6 +86,7 @@ class LoginPage extends BasePage {
     }
 
     checkLoginPopupAppeared() {
+
         cy.log('Check login popup appeared after registration')
         this.getLoginPopup()
             .should('be.visible');

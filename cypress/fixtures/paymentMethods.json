@@ -4,14 +4,8 @@
         "wallet": "Pay using wallet",
         "coupon": "Pay using wallet",
         "other": " Other payment options "
-
     },
-
     "paymentData": {
         "cardNumber": "1234567890987654"
-        
     }
-   
-
 }
-

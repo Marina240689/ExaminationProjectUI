@@ -1,4 +1,3 @@
-///<reference types="cypress"/>
 
 export default class BasePage {
 
@@ -46,11 +45,9 @@ export default class BasePage {
 
     }
 
-
     checkSuccessToastMessage(text) {
 
         cy.log('Check that success toast message appeared and contains product name')
-        // cy.get('simple-snack-bar .mat-simple-snack-bar-content')
         this.getToastMessage()
             .invoke('text')
             .should('contain', text)

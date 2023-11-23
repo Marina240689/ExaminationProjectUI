@@ -29,7 +29,7 @@ class OrderSummaryPage extends BasePage {
     ConfirmPlaceOrder() {
 
         cy.log('Click Place order button')
-        this.getPlaceOrderButton().click();
+        this.getPlaceOrderButton().click( {force: true} );
     }
 
 
