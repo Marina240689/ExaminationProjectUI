@@ -1,12 +1,10 @@
-import { findProduct } from '../helper';
-import home from '../support/pages/HomePage';
 import login from '../support/pages/LoginPage';
 import registration from '../support/pages/RegistrationPage';
-import { faker } from '@faker-js/faker';
+import home from '../support/pages/HomePage';
 import user from '../fixtures/user.json';
+import { fa, faker } from '@faker-js/faker';
 import question from '../fixtures/securityQuestion.json';
 import product from '../fixtures/product.json';
-import message from '../fixtures/messages.json';
 import basket from '../support/pages/BasketPage';
 import chooseAddress from '../support/pages/ChooseAddressPage';
 import address from '../fixtures/address.json';
@@ -15,8 +13,11 @@ import delivery from '../support/pages/DeliveryMethodPage';
 import deliveryMethod from '../fixtures/delivery.json';
 import payment from '../support/pages/PaymantPage';
 import paymentMethods from '../fixtures/paymentMethods.json';
+import message from '../fixtures/messages.json';
 import summary from '../support/pages/OrderSummaryPage';
 import completion from '../support/pages/OrderCompletionPage'
+
+
 
 user.email = faker.internet.email({ provider: 'testmail.com' });
 user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/); /**Так генерує пароль без спец символів */
@@ -31,9 +32,8 @@ address.state = faker.location.state();
 paymentMethods.paymentData.cardNumber = faker.finance.creditCardNumber({ issuer: '63##############' });
 
 
-describe('Order with function', () => {
 
-    /* Move to BEFORE */
+describe('Order test', () => {
 
     before(() => {
         registration.visit();
@@ -46,15 +46,12 @@ describe('Order with function', () => {
     })
 
     it('Make and order', () => {
-        home.visit()
-
-        cy.log('Find product and add to basket');
-        findProduct(product.secondPage.productName);
-        home.checkSuccessToastMessage(product.secondPage.productName);
-
+        home.visit();
+        home.addToBasket(product.firstPage);
+        home.checkSuccessToastMessage(product.firstPage.productName);
 
         basket.visit();
-        basket.checkProductIsPresentInBasket(product.secondPage);
+        basket.checkProductIsPresentInBasket(product.firstPage);
         basket.clickCheckoutButton();
 
         chooseAddress.clickAddAddressButton();
@@ -71,12 +68,11 @@ describe('Order with function', () => {
         payment.chooseCard();
         payment.clickContinueButton();
 
-        summary.checkProductInSummary(product.secondPage);
+        summary.checkProductInSummary(product.firstPage);
         summary.ConfirmPlaceOrder();
 
         completion.checkSuccessOrderText(message.orderConfirmationText);
 
     })
 
-
-})
+}) 

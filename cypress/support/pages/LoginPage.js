@@ -16,9 +16,8 @@ class LoginPage extends BasePage {
 
     visit() {
         cy.log('Open login page')
-        cy.visit('/login');
-        this.acceptCookie();
-        this.closeWelcomeMessage();
+        cy.visit('/login', {timeout: 3000});
+
 
     }
 
@@ -72,19 +71,6 @@ class LoginPage extends BasePage {
             .click();
     }
 
-    // checkUserIsLoggedIn(user) {  /*  не працює */
-
-    //     cy.log('Check user email in profile window')
-    //     this.getAccountIcon()
-    //         .click();
-    //     this.getAccountMenuEmail()
-    //         .should('be.visible')
-    //         // .eq(1).then(item => {
-    //         //     expect(item).text.eq(user.email)
-    //         // })
-    //         .should('contain', user.email)
-    // }
-
     checkUserIsLogedIn(user) {
         cy.log('Click on Account Icon')
         this.getAccountIcon()
@@ -96,6 +82,12 @@ class LoginPage extends BasePage {
             .first()
             .invoke('text')
             .should('contain', user.email);
+    }
+
+    checkLoginPopupAppeared() {
+        cy.log('Check login popup appeared after registration')
+        this.getLoginPopup()
+            .should('be.visible');
     }
 
     triggerEmptyErrorTooltips() {

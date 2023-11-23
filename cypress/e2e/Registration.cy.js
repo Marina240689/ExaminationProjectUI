@@ -4,7 +4,8 @@ import { faker } from '@faker-js/faker';
 import elements from '../fixtures/elements.json'
 import { checkErrorTooltipColor, checkValidatedFieldsColor } from '../helper';
 import question from '../fixtures/securityQuestion.json';
-import login from '../support/pages/LoginPage'
+import login from '../support/pages/LoginPage';
+import message from '../fixtures/messages.json'
 
 
 user.email = faker.internet.email({ provider: 'testmail.com' });
@@ -12,23 +13,26 @@ user.password = faker.internet.password(/^(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])
 user.answear = faker.person.firstName('female');
 
 
-describe('Check Registration', () => {
+describe('Registration', () => {
 
 
   it('Register a user', () => {
 
     registration.visit();
+    registration.acceptCookie();
     registration.register(user, question.mothersName);
+    registration.checkSuccessToastMessage(message.registrationToast);
 
-    cy.log('Check login popup appeared')
-    login.getLoginPopup()
-      .should('be.visible')
+   
+    login.checkLoginPopupAppeared();
   })
 
 
   it('Check Login after registration', () => {
 
     login.visit();
+    login.acceptCookie();
+    login.closeWelcomeMessage();
     login.login(user);
     login.checkUserIsLogedIn(user)
   })
@@ -37,6 +41,7 @@ describe('Check Registration', () => {
   it('Validation of elements for empty state', () => {
 
     registration.visit();
+    registration.acceptCookie();
     registration.leaveAllFieldsEmppty();
 
     cy.log('Check color and visability of all erorr tooltips for empty fields')

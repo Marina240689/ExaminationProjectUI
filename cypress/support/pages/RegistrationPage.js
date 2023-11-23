@@ -29,9 +29,6 @@ class RegistrationPage extends BasePage {
         cy.url()
             .should('include', '/register');
 
-        cy.log('Accept cookie');
-        this.acceptCookie();
-
         cy.log('Close Welcome popup')
         this.closeWelcomeMessage();
     }
@@ -124,11 +121,8 @@ class RegistrationPage extends BasePage {
         this.getRepeatpasswordInput().focus().blur();
         this.getAnswearInput().focus().blur();
         this.getSecurityQuestionDropdown().click();
-        cy.get('body').click()   /** тимчасовий солюшн */
+        cy.get('body').click()
     }
-
-
-
 
 
 }

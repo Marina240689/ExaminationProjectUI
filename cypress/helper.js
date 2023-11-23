@@ -39,9 +39,12 @@ export function checkErrorTooltipColor(page, element) {
     // }
 
     export function findProduct(productName) { /* не працює */
-    cy.get('[class="item-name"]').then(element => {
-        if(element.find(`.item-name:contains("${productName}")`).length > 0) {
-            cy.get('.item-name:contains("${productName}")').click();
+    cy.get('div.table-container').then(list => {
+        if(list.find(`[alt="${productName}"]`).length > 0 ) {
+            cy.get(`[alt="${productName}"]`)
+            .closest('.ribbon-card')
+            .find('[aria-label="Add to Basket"]')
+            .click()
         } else {
             cy.get('[aria-label="Next page"]').should('be.enabled').click({force:true});
             findProduct(productName);

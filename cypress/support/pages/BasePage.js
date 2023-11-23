@@ -8,6 +8,7 @@ export default class BasePage {
         this.elements.dissmissWelcomeMessageButton = '.close-dialog';
         this.elements.accountIcon = '#navbarAccount';
         this.elements.accountMenu = '[class*="mat-menu-content"]';
+        this.elements.toastMessage = 'simple-snack-bar .mat-simple-snack-bar-content';
     }
 
     getAcceptCookieButton() {
@@ -26,26 +27,40 @@ export default class BasePage {
         return cy.get(this.elements.accountMenu);
     }
 
-    acceptCookie(){
-        cy.log('Accept cookie')
-        this.getAcceptCookieButton().then(cookie => {
-            if(cookie.length > 0) {
-                cy.wrap(cookie).click();
-            }
-        })
+    getToastMessage() {
+        return cy.get(this.elements.toastMessage);
     }
 
-    closeWelcomeMessage(){
+    acceptCookie() {
+        cy.log('Accept cookie')
+        this.getAcceptCookieButton().click();
+    }
+
+    closeWelcomeMessage() {
         cy.log('Close welcome message');
         this.getDissmissWelcomeMessageButton().then(message => {
-            if(message.length > 0) {
+            if (message.length > 0) {
                 cy.wrap(message).click();
             }
         })
 
     }
 
-   
+
+    checkSuccessToastMessage(text) {
+
+        cy.log('Check that success toast message appeared and contains product name')
+        // cy.get('simple-snack-bar .mat-simple-snack-bar-content')
+        this.getToastMessage()
+            .invoke('text')
+            .should('contain', text)
+
+    }
+
+
+
+
+
 
 
 
