@@ -43,13 +43,12 @@ describe('Order test', () => {
         login.checkLoginPopupAppeared();
         login.login(user);
         login.checkUserIsLogedIn(user);
+        home.visit();
 
     })
 
     it('Make and order', () => {
-
-        home.visit();
-
+        
         new Promise ((resolve) => {
             setTimeout(() => {
 

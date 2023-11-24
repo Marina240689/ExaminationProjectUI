@@ -40,17 +40,18 @@ describe('Order with function', () => {
         registration.checkSuccessToastMessage(message.registrationToast);
         login.checkLoginPopupAppeared();
         login.login(user);
+        home.visit()
     })
 
     it('Make and order', () => {
-        home.visit()
-
-        cy.log('Find product and add to basket');
-        findProduct(product.secondPage.productName);
-        home.checkSuccessToastMessage(product.secondPage.productName);
 
         new Promise((resolve) => {
             setTimeout(() => {
+
+                cy.log('Find product and add to basket');
+                findProduct(product.secondPage.productName);
+                home.checkSuccessToastMessage(product.secondPage.productName);
+
 
 
                 basket.visit();
