@@ -28,7 +28,7 @@ class ChooseAddressPage extends BasePage {
         this.getAddAddressButton()
             .should('be.visible')
             .and('be.enabled')
-            .click({ force: true });
+            .click({ force: true }, { timeout: 2000 });
     }
 
     chooseAddress() {
@@ -41,7 +41,7 @@ class ChooseAddressPage extends BasePage {
         cy.log('Check next button is enebled and click');
         this.getNextButton()
             .should('be.enabled')
-            .click( {force:true});
+            .click({ force: true }, { timeout: 2000 });
 
 
     }

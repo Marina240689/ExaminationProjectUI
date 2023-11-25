@@ -34,7 +34,7 @@ class BasketPage extends BasePage {
 
         cy.log('Click checkout button')
         this.getCheckoutButton()
-            .click({ force: true });
+            .click({ force: true }, { timeout: 2000 });
     }
 
 

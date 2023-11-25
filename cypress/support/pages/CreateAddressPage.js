@@ -49,13 +49,20 @@ class CreateAddressPage extends BasePage {
     createAddress(address) {
 
         cy.log('Fill address fields')
-        this.getCountryField().type(address.country, { force: true });
-        this.getNameField().type(address.name, { force: true });
-        this.getMobileNumberField().type(address.phone, { force: true });
-        this.getZipField().type(address.zip, { force: true });
-        this.getAddressField().type(address.address, { force: true });
-        this.getCityField().type(address.city, { force: true });
-        this.getStateField().type(address.state, { force: true });
+        this.getCountryField().type(address.country, { force: true })
+        .should('have.value', address.country );
+        this.getNameField().type(address.name, { force: true })
+        .should('have.value', address.name );
+        this.getMobileNumberField().type(address.phone, { force: true })
+        .should('have.value', address.phone );
+        this.getZipField().type(address.zip, { force: true })
+        .should('have.value', address.zip );
+        this.getAddressField().type(address.address, { force: true })
+        .should('have.value',address.address );
+        this.getCityField().type(address.city, { force: true })
+        .should('have.value',address.city );
+        this.getStateField().type(address.state, { force: true })
+        .should('have.value',address.state, );
 
         cy.log('Check Submit button is active and click');
         this.getSubmitButton()

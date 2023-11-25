@@ -11,7 +11,7 @@ class PaymentPage extends BasePage {
         this.elements.expireMonthDropdown = '#mat-input-16';
         this.elements.expireYearDropdown = '#mat-input-17';
         this.elements.submitButton = '#submitButton';
-        this.elements.chooseCardRadioButton = '#mat-radio-44-input';
+        this.elements.chooseCardRadioButton = '#mat-radio-44';
         this.elements.continueButton = 'button.nextButton';
 
 
@@ -53,33 +53,37 @@ class PaymentPage extends BasePage {
     choosePaymentMethod(method) {
 
         cy.log('Choose Payment Method')
-        this.getListOfPaymentMethods().contains(method).click({ force: true });
+        this.getListOfPaymentMethods()
+            .contains(method)
+            .click({ force: true }, { timeout: 2000 });
     }
 
-    fillCardData(data, payment) {
+    fillCardData(data, payment,) {
 
         cy.log('Fill card data')
         this.getNameInput().type(data.name, { force: true })
         this.getCardNumberInput().type(payment.cardNumber, { force: true });
         this.getExpireMonthDropdown().select('1', { force: true });
-        this.getExpireYearDropdown().select('2083', { force: true });
+        this.getExpireYearDropdown().select('2094', { force: true });
 
         cy.log('Check that Submit button is enabled and click')
         this.getSubmitButton()
             .should('be.enabled')
-            .click({ force: true });
+            .click({ force: true }, {timeout: 2000});
     }
 
     chooseCard() {
 
         cy.log('Check checkbox of saved card');
-        this.getChooseCardRadioButton().check({ force: true });
+        this.getChooseCardRadioButton().dblclick({ force: true }, {timeout: 2000});
     }
 
     clickContinueButton() {
 
         cy.log('Click Continue button after choosing card');
-        this.getContinueButton().click({ force: true });
+        this.getContinueButton()
+        .should('be.enabled')
+        .click({ force: true }, {timeout: 2000});
     }
 
 

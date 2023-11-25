@@ -49,8 +49,8 @@ describe('Order test', () => {
 
     it('Make and order', () => {
         
-        new Promise ((resolve) => {
-            setTimeout(() => {
+        // new Promise ((resolve) => {
+        //     setTimeout(() => {
 
                 home.addToBasket(product.firstPage);
                 home.checkSuccessToastMessage(product.firstPage.productName);
@@ -80,10 +80,10 @@ describe('Order test', () => {
         
                 completion.checkSuccessOrderText(message.orderConfirmationText);
 
-                resolve();
-            }, 2000)
+            //     resolve();
+            // }, 2000)
 
-        })
+        // })
 
     })
 

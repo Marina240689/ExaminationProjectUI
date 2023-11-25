@@ -45,8 +45,8 @@ describe('Order with function', () => {
 
     it('Make and order', () => {
 
-        new Promise((resolve) => {
-            setTimeout(() => {
+        // new Promise((resolve) => {
+        //     setTimeout(() => {
 
                 cy.log('Find product and add to basket');
                 findProduct(product.secondPage.productName);
@@ -80,10 +80,10 @@ describe('Order with function', () => {
 
                 completion.checkSuccessOrderText(message.orderConfirmationText);
 
-                resolve();
-            }, 2000)
+            //     resolve();
+            // }, 2000)
 
-        })
+        
     })
 
 })

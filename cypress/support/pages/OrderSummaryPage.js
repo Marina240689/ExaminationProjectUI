@@ -23,13 +23,13 @@ class OrderSummaryPage extends BasePage {
 
         cy.log('Check that added product is present in Checkout')
         this.getSummaryContainer()
-            .contains(text.productName);
+            .contains(text.productName, { timeout: 2000 });
     }
 
     ConfirmPlaceOrder() {
 
         cy.log('Click Place order button')
-        this.getPlaceOrderButton().click( {force: true} );
+        this.getPlaceOrderButton().click({ force: true }, { timeout: 2000 });
     }
 
 
