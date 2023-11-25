@@ -45,45 +45,38 @@ describe('Order with function', () => {
 
     it('Make and order', () => {
 
-        // new Promise((resolve) => {
-        //     setTimeout(() => {
 
-                cy.log('Find product and add to basket');
-                findProduct(product.secondPage.productName);
-                home.checkSuccessToastMessage(product.secondPage.productName);
+        cy.log('Find product and add to basket');
+        findProduct(product.secondPage.productName);
+        home.checkSuccessToastMessage(product.secondPage.productName);
 
 
 
-                basket.visit();
-                basket.checkProductIsPresentInBasket(product.secondPage);
-                basket.clickCheckoutButton();
+        basket.visit();
+        basket.checkProductIsPresentInBasket(product.secondPage);
+        basket.clickCheckoutButton();
 
-                chooseAddress.clickAddAddressButton();
-                createAddress.createAddress(address);
-                createAddress.checkSuccessToastMessage(address.city);
+        chooseAddress.clickAddAddressButton();
+        createAddress.createAddress(address);
+        createAddress.checkSuccessToastMessage(address.city);
 
-                chooseAddress.chooseAddress();
+        chooseAddress.chooseAddress();
 
 
 
-                delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
+        delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
 
-                payment.choosePaymentMethod(paymentMethods.methods.card);
+        payment.choosePaymentMethod(paymentMethods.methods.card);
 
-                payment.fillCardData(address, paymentMethods.paymentData);
-                payment.checkSuccessToastMessage(message.cardToast);
-                payment.chooseCard();
-                payment.clickContinueButton();
+        payment.fillCardData(address, paymentMethods.paymentData);
+        payment.checkSuccessToastMessage(message.cardToast);
+        payment.chooseCard();
+        payment.clickContinueButton();
 
-                summary.checkProductInSummary(product.secondPage);
-                summary.ConfirmPlaceOrder();
+        summary.checkProductInSummary(product.secondPage);
+        summary.ConfirmPlaceOrder();
 
-                completion.checkSuccessOrderText(message.orderConfirmationText);
-
-            //     resolve();
-            // }, 2000)
-
-        
+        completion.checkSuccessOrderText(message.orderConfirmationText);
     })
 
 })

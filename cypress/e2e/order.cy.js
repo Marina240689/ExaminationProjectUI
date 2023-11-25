@@ -48,42 +48,35 @@ describe('Order test', () => {
     })
 
     it('Make and order', () => {
-        
-        // new Promise ((resolve) => {
-        //     setTimeout(() => {
 
-                home.addToBasket(product.firstPage);
-                home.checkSuccessToastMessage(product.firstPage.productName);
-        
-                basket.visit();
-                basket.checkProductIsPresentInBasket(product.firstPage);
-                basket.clickCheckoutButton();
-        
-                chooseAddress.clickAddAddressButton();
-                createAddress.createAddress(address);
-                createAddress.checkSuccessToastMessage(address.city);
-        
-                chooseAddress.chooseAddress();
-                
-        
-                delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
-        
-                payment.choosePaymentMethod(paymentMethods.methods.card);
-        
-                payment.fillCardData(address, paymentMethods.paymentData);
-                payment.checkSuccessToastMessage(message.cardToast);
-                payment.chooseCard();
-                payment.clickContinueButton();
-        
-                summary.checkProductInSummary(product.firstPage);
-                summary.ConfirmPlaceOrder();
-        
-                completion.checkSuccessOrderText(message.orderConfirmationText);
+        home.addToBasket(product.firstPage);
+        home.checkSuccessToastMessage(product.firstPage.productName);
 
-            //     resolve();
-            // }, 2000)
+        basket.visit();
+        basket.checkProductIsPresentInBasket(product.firstPage);
+        basket.clickCheckoutButton();
 
-        // })
+        chooseAddress.clickAddAddressButton();
+        createAddress.createAddress(address);
+        createAddress.checkSuccessToastMessage(address.city);
+
+        chooseAddress.chooseAddress();
+
+
+        delivery.chooseDeliveryMethod(deliveryMethod.oneDay);
+
+        payment.choosePaymentMethod(paymentMethods.methods.card);
+
+        payment.fillCardData(address, paymentMethods.paymentData);
+        payment.checkSuccessToastMessage(message.cardToast);
+        payment.chooseCard();
+        payment.clickContinueButton();
+
+        summary.checkProductInSummary(product.firstPage);
+        summary.ConfirmPlaceOrder();
+
+        completion.checkSuccessOrderText(message.orderConfirmationText);
+
 
     })
 
