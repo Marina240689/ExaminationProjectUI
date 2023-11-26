@@ -1,0 +1,10 @@
+{
+    "address.country": "country",
+    "address.name": "name",
+    "address.phone": "111111111111",
+    "address.zip": "123456",
+    "address.address": "address test",
+    "address.city": "city",
+    "address.state": "state",
+    "address.cardNumber": "card number"
+}

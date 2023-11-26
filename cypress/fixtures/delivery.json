@@ -1,0 +1,11 @@
+{
+    "oneDay": {
+        "icon": "rocket"
+    },
+    "fast": {
+        "icon": "shipping-fast"
+    },
+    "standard": {
+        "icon": "truck"
+    }
+}

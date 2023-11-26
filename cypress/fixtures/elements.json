@@ -1,0 +1,8 @@
+{
+    "errorColor": "rgb(255, 87, 34)",
+    "emailTooltipText": "Please provide an email address.",
+    "passwordTooltipText": "Please provide a password.",
+    "repeatPasswordTooltipText": " Please repeat your password. ",
+    "securityQuestionTooltipText": " Please select a security question. ",
+    "answearErrorTooltipText": " Please provide an answer to your security question. "
+}
